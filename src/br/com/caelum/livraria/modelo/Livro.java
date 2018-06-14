@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -20,7 +21,7 @@ public class Livro {
 	private double preco;
 	private String dataLancamento;
 
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.EAGER)
 	private List<Autor> autores = new ArrayList<Autor>();
 
 	public List<Autor> getAutores() {
@@ -72,6 +73,10 @@ public class Livro {
 
 	public void setDataLancamento(String dataLancamento) {
 		this.dataLancamento = dataLancamento;
+	}
+	
+	public void removerAutor(Autor autor) {
+		this.autores.remove(autor);
 	}
 
 }
